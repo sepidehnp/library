@@ -69,6 +69,7 @@
                         <th>Author Image</th>
                         <th>Book Image</th>
                         <th>Delete</th>
+                        <th>Update</th>
                     </tr>
 
                     @foreach ($book as $book)
@@ -89,6 +90,10 @@
 
                         <td>
                             <a onclick="confirmation(event)" href="{{ url('book_delete',$book->id) }}" class="btn btn-danger">Delete</a>
+                        </td>
+
+                        <td>
+                            <a href="{{ url('edit_book',$book->id) }}" class="btn btn-info">Update</a>
                         </td>
 
                     </tr>
