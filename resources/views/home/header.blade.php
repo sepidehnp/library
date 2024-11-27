@@ -37,7 +37,7 @@
 
                               <x-app-layout>
                               </x-app-layout>
-                            
+
 
                             @else
 
@@ -51,7 +51,13 @@
 
                     @endif
 
-
+                    @if(session()->has('message'))
+                    <div class="alert alert-success">
+                       <button type="button" class="close" data-bs-dismiss="alert" aria-hidden=true> x </button>
+                    {{ session()->get('message') }}
+                    </div>
+                    @endif
+                    
                     </ul>
                     <a class='menu-trigger'>
                         <span>Menu</span>
