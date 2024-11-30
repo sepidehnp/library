@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Borrow;
 
 class AdminController extends Controller
 {
@@ -159,6 +160,69 @@ class AdminController extends Controller
         $data->save();
         return redirect('/show_book')->with('message', 'Book Updated Successfully');
 
+    }
+
+    public function borrow_request()
+    {
+        $data = Borrow::all();
+        return view('admin.borrow_request',compact('data'));
+    }
+
+    public function approve_book($id)
+    {
+       $data = Borrow::find($id);
+       $status = $data->status;
+
+       if($status == 'approved'){
+        return redirect()->back();
+       }
+       else
+       {
+        $data->status = 'approved';
+        $data->save();
+        $bookid = $data->book_id;
+        $book = Book::find($bookid);
+        $book_qty = $book->quantity - '1';
+        $book->quantity = $book_qty;
+        $book->save();
+
+        return redirect()->back();
+       }
+
+
+    }
+
+
+    public function return_book($id)
+    {
+       $data = Borrow::find($id);
+       $status = $data->status;
+
+       if($status == 'returned'){
+        return redirect()->back();
+       }
+       else
+       {
+        $data->status = 'returned';
+        $data->save();
+        $bookid = $data->book_id;
+        $book = Book::find($bookid);
+        $book_qty = $book->quantity + '1';
+        $book->quantity = $book_qty;
+        $book->save();
+
+        return redirect()->back();
+       }
+
+
+    }
+
+    public function rejected_book($id)
+    {
+      $data = Borrow::find($id);
+      $data->status = "rejected";
+      $data->save();
+      return redirect()->back();
     }
 
 }
