@@ -4,10 +4,11 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\MailController;
 
 
 Route::get('/', [HomeController::class, 'index']);
-
+Route::get('send-email', [MailController::class, 'sendEmail']);
 
 Route::middleware([
     'auth:sanctum',
