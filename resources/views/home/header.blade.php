@@ -26,8 +26,8 @@
                     <!-- ***** Menu Start ***** -->
                     <ul class="nav">
                         <li><a href="index.html" class="active">Home</a></li>
-                        <li><a href="explore.html">Explore</a></li>
-                        <li><a href="details.html">Item Details</a></li>
+                        <li><a href="{{ url('explore') }}">Explore</a></li>
+                        <li><a href="{{ url('book_details') }}">Item Details</a></li>
 
                         <li><a href="create.html">Create Yours</a></li>
 
@@ -55,12 +55,12 @@
 
                     @endif
 
-                    @if(session()->has('message'))
+                    {{-- @if(session()->has('message'))
                     <div class="alert alert-success">
                        <button type="button" class="close" data-bs-dismiss="alert" aria-hidden=true> x </button>
                     {{ session()->get('message') }}
                     </div>
-                    @endif
+                    @endif --}}
 
                     </ul>
                     <a class='menu-trigger'>

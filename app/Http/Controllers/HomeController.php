@@ -65,4 +65,24 @@ class HomeController extends Controller
         }
 
     }
+
+    public function cancel_req($id)
+    {
+      $data = Borrow::find($id);
+      $data->delete();
+      return redirect()->back()->with('message','Book Borrow request cancelled successfully');
+    }
+
+    public function explore()
+    {
+        $data = Book::all();
+        return view('home.explore',compact('data'));
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->search;
+        $data = Book::where('title', 'LIKE', '%'.$search.'%')->orWhere('author_name', 'LIKE', '%'.$search.'%')->get();
+        return view('home.explore',compact('data'));
+    }
 }
